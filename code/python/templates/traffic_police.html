@@ -2,27 +2,27 @@
 <html>
     <head>
         <style>
-            body{
-                background-color:beige;
+            body {
+                background-color: beige;
             }
-            .container{
-                display:flex;
-                flex-direction:column;
-                justify-content:center;
-                align-items:center;
+            .container {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
             }
-            .selection{
-                margin:50px;
+            .selection {
+                margin: 50px;
             }
-            .hospital_details{
-                margin:50px;
+            .traffic-details {
+                margin: 50px;
             }
-            td,th{
-                border:1px solid blueviolet;
-                padding:10px 20px;
+            td, th {
+                border: 1px solid blueviolet;
+                padding: 10px 20px;
             }
-            h1{
-                text-align:center;
+            h1 {
+                text-align: center;
             }
         </style>
     </head>
@@ -31,35 +31,35 @@
             <h1>Traffic Police Page</h1>
         </header>
         <div class="container">
-        <div class="selection">
-            <form action="/traffic-police" method="POST">
-                <select name="traffic_name_tp" onchange="">
+            <div class="selection">
+                <form action="/traffic-police" method="POST">
+                    <select name="traffic_name_tp">
+                        {% for i in traffic_list %}
+                        <option value="{{i[0]}}">{{i[0]}}</option>
+                        {% endfor %}
+                    </select>
+                    <select name="Signal_Status">
+                        <option value=1>Free</option>
+                        <option value=0>Busy</option>
+                    </select>
+                    <input type="submit"/>
+                </form>
+            </div>
+            {{record_updated}}
+            <div class="traffic-details">
+                <table>
+                    <tr>
+                        <th>Signal Location</th>
+                        <th>Signal Status</th>
+                    </tr>
                     {% for i in traffic_list %}
-                    <option value="{{i[0]}}">{{i[0]}}</option>
+                    <tr>
+                        <td>{{i[0]}}</td>
+                        <td>{{i[1]}}</td>
+                    </tr>
                     {% endfor %}
-                </select>
-                <select name="Signal_Status">
-                    <option value=1>Free</option>
-                    <option value=0>Busy</option>
-                </select>
-                <input type="submit"/>
-            </form>
+                </table>
+            </div>
         </div>
-        {{record_updated}}
-        <div class="traffic-details">
-            <table>
-                <tr>
-                    <th>Signal Location</th>
-                    <th>Signal status</th>
-                </tr>
-                {% for i in traffic_list %}
-                <tr>
-                    <td>{{i[0]}}</td>
-                    <td>{{i[1]}}</td>
-                </tr>
-                {%endfor%}
-            </table>
-        </div>
-    </div>
     </body>
 </html>
